@@ -8,8 +8,14 @@ const config = {
 	// for more information about preprocessors
 	preprocess: [vitePreprocess(), mdsvex()],
 
-	kit: { adapter: adapter() },
+	kit: { adapter: adapter(),
+		  serviceWorker: {
+    register: false
+  }
+
+	},
 	extensions: ['.svelte', '.svx']
 };
 
 export default config;
+
