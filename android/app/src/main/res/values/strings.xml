@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Dyglot</string>
+    <string name="title_activity_main">Dyglot</string>
+    <string name="package_name">xyz.canardoux.dyglot</string>
+    <string name="custom_url_scheme">xyz.canardoux.dyglot</string>
+</resources>

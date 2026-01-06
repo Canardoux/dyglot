@@ -1,11 +1,27 @@
 #!/bin/bash
-npm run build
 if [ $# -eq 0 ]; then
     	echo "No arguments supplied"
+	exit 1
+fi
+npm run build
+if [ $? -ne 0 ]; then
+	echo "Error during `npm run build`" >&2
 	exit 1
 fi
 git add .
 git commit -m "$1"
 git push
+source ~/bin/key.sh
+# Ensure Xcode uses Apple's rsync
+export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+hash -r
+which rsync
+rsync --version
+npm run ios:beta
+if [ $? -ne 0 ]; then
+        echo "Error during `npm run ios:beta`" >&2
+        exit 1
+fi
 
+echo "*** E.O.J. ***"
 
