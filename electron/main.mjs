@@ -178,14 +178,14 @@ async function createWindow() {
     }
   });
 
-  if (DEBUG) {
+  //if (DEBUG) {
     win.webContents.openDevTools({ mode: 'detach' });
     win.webContents.on('did-fail-load', (_e, code, desc, url) => console.error('did-fail-load:', { code, desc, url }));
     win.webContents.on('render-process-gone', (_e, details) => console.error('renderer gone:', details));
     win.webContents.on('console-message', (_e, level, message, line, sourceId) =>
       console.log('renderer:', { level, message, line, sourceId })
     );
-  }
+  //}
 
   await win.loadURL('app://-/');
 }
