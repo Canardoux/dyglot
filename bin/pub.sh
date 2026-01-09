@@ -24,9 +24,10 @@ if [ $? -ne 0 ]; then
 fi
 
 rm -rf build .svelte-kit dist-electron
-npm run desktop:dir
-#npx electron-builder --config electron-builder.yml --mac --dir
-open dist-electron/mac-arm64/Dyglot.app
+BUILD_TARGET=desktop VITE_BUILD_TARGET=desktop npm run build:desktop
+# vérifiez que le log dit bien: "Using @sveltejs/adapter-static" + "Wrote site to "build""
+CSC_IDENTITY_AUTO_DISCOVERY=false npx electron-builder --mac --dir
+open -n dist-electron/mac-arm64/Dyglot.app
 
 echo "*** E.O.J. ***"
 
