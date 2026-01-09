@@ -29,3 +29,17 @@ project.inlang/cache/
 
 *storybook.log
 storybook-static
+
+# Electron build outputs
+dist-electron/
+dist/
+out/
+release/
+
+# SvelteKit/Vite
+.svelte-kit/
+build/
+node_modules/
+
+# macOS
+.DS_Store
