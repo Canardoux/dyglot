@@ -23,5 +23,10 @@ if [ $? -ne 0 ]; then
         exit 1
 fi
 
+rm -rf build .svelte-kit dist-electron
+npm run desktop:dir
+#npx electron-builder --config electron-builder.yml --mac --dir
+open dist-electron/mac-arm64/Dyglot.app
+
 echo "*** E.O.J. ***"
 

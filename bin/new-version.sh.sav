@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+APP_ID="xyz.canardoux.dyglot"
+ANDROID_DIR="$(cd "$(dirname "$0")" && pwd)/../android"
+
+echo "ANDROID_DIR=$ANDROID_DIR"
+cd "$ANDROID_DIR"
+
+# 🔢 Incrément automatique versionCode
+VERSION_CODE=$(grep versionCode app/build.gradle | awk '{print $2}')
+NEW_VERSION_CODE=$((VERSION_CODE + 1))
+
+echo "➡️  versionCode $VERSION_CODE → $NEW_VERSION_CODE"
+
+sed -i '' "s/versionCode $VERSION_CODE/versionCode $NEW_VERSION_CODE/" app/build.gradle
+
+# 🏗 Build APK debug
+./gradlew assembleDebug
+
+# 📲 Install sur le téléphone
+APK_PATH="app/build/outputs/apk/debug/app-debug.apk"
+
+adb install -r "$APK_PATH"
+
+echo "✅ Dyglot installé (versionCode=$NEW_VERSION_CODE)"

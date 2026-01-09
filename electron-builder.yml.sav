@@ -1,0 +1,18 @@
+appId: xyz.canardoux.dyglot
+productName: Dyglot
+
+directories:
+  output: dist-electron
+  buildResources: electron/buildResources # ✅ IMPORTANT
+
+asar: true
+
+files:
+  - build/**/*
+  - electron/**/*
+  - package.json
+
+mac:
+  category: public.app-category.education
+  target:
+    - dir
