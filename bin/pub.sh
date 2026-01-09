@@ -10,6 +10,7 @@ if [ $? -ne 0 ]; then
 fi
 git add .
 git commit -m "$1"
+git pull
 git push
 source ~/bin/key.sh
 # Ensure Xcode uses Apple's rsync
