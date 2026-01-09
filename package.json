@@ -15,7 +15,9 @@
 
 		"desktop:dev": "concurrently -k \"cross-env BUILD_TARGET=desktop VITE_BUILD_TARGET=desktop vite dev\" \"wait-on http://localhost:5173 && electron .\"",
 
-		"desktop:dir": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --dir",
+		"desktop:dir": "BUILD_TARGET=desktop npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --dir",
+		"desktop:build": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac",
+
 		"desktop:dist:mac": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac",
 		"desktop:dist:win": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win",
 		"desktop:dist:linux": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --linux",
@@ -35,8 +37,7 @@
 		"android:sync": "npm run build && npx cap sync android",
 		"android:debug": "npm run android:sync && cd android && ./gradlew assembleDebug",
 		"android:release": "npm run android:sync && cd android && ./gradlew bundleRelease",
-    		"desktop:build": "npm run build:desktop && electron-builder --config electron-builder.yml --mac",
-		"dev:desktop": "BUILD_TARGET=desktop npm run dev"
+ 		"dev:desktop": "BUILD_TARGET=desktop npm run dev"
 	},
 	"build": {
 		"appId": "xyz.canardoux.dyglot",

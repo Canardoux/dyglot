@@ -115,6 +115,16 @@ async function createWindow() {
     }
   });
 
+win.webContents.openDevTools({ mode: 'detach' });
+
+win.webContents.on('did-fail-load', (_e, code, desc, url) => {
+  console.error('did-fail-load:', { code, desc, url });
+});
+
+win.webContents.on('console-message', (_e, level, message, line, sourceId) => {
+  console.log('renderer console:', { level, message, line, sourceId });
+});
+
   await win.loadURL('app://-/');
 }
 
