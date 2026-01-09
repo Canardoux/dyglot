@@ -21,7 +21,7 @@
 		"desktop:dist:mac": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac",
 		"desktop:dist:win": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win",
 		"desktop:dist:linux": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --linux",
-
+		"desktop:run:debug": "ELECTRON_DEBUG=1 npm run build:desktop && electron-builder --mac --dir && open -n dist-electron/mac-arm64/Dyglot.app",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -51,7 +51,12 @@
 			"package.json"
 		],
 		"mac": { "target": ["dir", "dmg"], "category": "public.app-category.education", "identity": null },
-		"asar": true
+		"asar": true,
+		"linux": {
+			"maintainer": "Larpoux <larpoux@gmail.com>",
+			"target": ["AppImage", "deb"],
+			"category": "Education"
+		}
 	},
 	"devDependencies": {
 		"@chromatic-com/storybook": "^4.1.3",

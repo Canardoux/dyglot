@@ -74,6 +74,8 @@ app.on('window-all-closed', () => {
 });
 */
 
+/*
+
 import { app, BrowserWindow, protocol } from 'electron';
 import path from 'node:path';
 
@@ -124,6 +126,66 @@ win.webContents.on('did-fail-load', (_e, code, desc, url) => {
 win.webContents.on('console-message', (_e, level, message, line, sourceId) => {
   console.log('renderer console:', { level, message, line, sourceId });
 });
+
+  await win.loadURL('app://-/');
+}
+
+app.whenReady().then(() => {
+  registerAppProtocol();
+  createWindow();
+});
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
+});
+*/
+
+// electron/main.mjs
+import { app, BrowserWindow, protocol } from 'electron';
+import path from 'node:path';
+
+const DEBUG = process.env.ELECTRON_DEBUG === '1';
+
+protocol.registerSchemesAsPrivileged([
+  { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true } }
+]);
+
+function registerAppProtocol() {
+  protocol.registerFileProtocol('app', (request, callback) => {
+    try {
+      let url = request.url.replace('app://-/', '');
+      url = url.split('?')[0].split('#')[0];
+      if (url === '' || url === '/') url = 'index.html';
+
+      const buildDir = path.join(app.getAppPath(), 'build');
+      const filePath = path.join(buildDir, url);
+      callback({ path: filePath });
+    } catch {
+      callback({ error: -6 }); // FILE_NOT_FOUND
+    }
+  });
+}
+
+async function createWindow() {
+  const win = new BrowserWindow({
+    width: 1200,
+    height: 800,
+    show: true,
+    webPreferences: {
+      sandbox: true,
+      contextIsolation: true,
+      nodeIntegration: false
+    }
+  });
+
+  if (DEBUG) {
+    win.webContents.openDevTools({ mode: 'detach' });
+    win.webContents.on('did-fail-load', (_e, code, desc, url) => console.error('did-fail-load:', { code, desc, url }));
+    win.webContents.on('render-process-gone', (_e, details) => console.error('renderer gone:', details));
+    win.webContents.on('console-message', (_e, level, message, line, sourceId) =>
+      console.log('renderer:', { level, message, line, sourceId })
+    );
+  }
 
   await win.loadURL('app://-/');
 }

@@ -9,11 +9,11 @@ import { fileURLToPath, URL } from 'node:url';
 
 const target = process.env.BUILD_TARGET;
 const isDesktop = target === 'desktop';
-const isIOS = target === 'ios';
-const isFileTarget = isDesktop || isIOS;
+//const isIOS = target === 'ios';
+//const isFileTarget = isDesktop || isIOS;
 
 export default defineConfig({
-  	base: isFileTarget ? './' : '/',
+  	//base: isFileTarget ? './' : '/',
 	resolve: {
 			alias: {
 				$pwa: fileURLToPath(
