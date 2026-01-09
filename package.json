@@ -18,9 +18,10 @@
 		"desktop:dir": "BUILD_TARGET=desktop npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac --dir",
 		"desktop:build": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac",
 
-		"desktop:dist:mac": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --mac",
-		"desktop:dist:win": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --win",
-		"desktop:dist:linux": "npm run build:desktop && CSC_IDENTITY_AUTO_DISCOVERY=false electron-builder --linux",
+		"desktop:dist:mac": "npm run build:desktop && electron-builder --mac",
+		"desktop:dist:win": "npm run build:desktop && electron-builder --win",
+		"desktop:dist:linux": "npm run build:desktop && electron-builder --linux",
+
 		"desktop:run:debug": "ELECTRON_DEBUG=1 npm run build:desktop && electron-builder --mac --dir && open -n dist-electron/mac-arm64/Dyglot.app",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
