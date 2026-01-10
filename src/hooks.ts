@@ -1,7 +1,8 @@
+// src/hooks.ts
+import type { Reroute } from '@sveltejs/kit';
 import { deLocalizeUrl } from '$lib/paraglide/runtime';
 
-export const reroute = (request) => deLocalizeUrl(request.url).pathname;
+export const reroute: Reroute = ({ url }) => deLocalizeUrl(url).pathname;
 
 // Temporary shim for builds that expect `transport`.
-// Remove once the feature is properly implemented or no longer required.
 export const transport = undefined;

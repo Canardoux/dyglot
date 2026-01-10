@@ -1,12 +1,11 @@
-import { mdsvex } from 'mdsvex';
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import staticAdapter from '@sveltejs/adapter-static';
+// svelte.config.desktop.js
+import base from './svelte.config.base.js';
+import adapter from '@sveltejs/adapter-static';
 
 export default {
-  preprocess: [vitePreprocess(), mdsvex()],
-  extensions: ['.svelte', '.svx'],
+  ...base,
   kit: {
-    adapter: staticAdapter({ fallback: 'index.html' }),
-    serviceWorker: { register: false }
+    ...base.kit,
+    adapter: adapter({ fallback: 'index.html' })
   }
 };

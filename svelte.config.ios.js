@@ -1,13 +1,11 @@
+// svelte.config.ios.js
+import base from './svelte.config.base.js';
 import adapter from '@sveltejs/adapter-static';
-import config from './svelte.config.js';
 
-// This config is only for Capacitor (iOS build).
 export default {
-  ...config,
+  ...base,
   kit: {
-    ...config.kit,
-    adapter: adapter({
-      fallback: 'index.html' // SPA fallback so routes work inside the app
-    })
+    ...base.kit,
+    adapter: adapter({ fallback: 'index.html' })
   }
 };
