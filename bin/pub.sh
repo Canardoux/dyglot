@@ -40,6 +40,7 @@ if [ $? -ne 0 ]; then
         exit 1
 fi
 
+exit 0
 #rm -rf build .svelte-kit dist-electron
 #BUILD_TARGET=desktop VITE_BUILD_TARGET=desktop npm run build:desktop
 ## vérifiez que le log dit bien: "Using @sveltejs/adapter-static" + "Wrote site to "build""
