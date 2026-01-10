@@ -31,6 +31,10 @@ mv dist-electron dist/mac-arm64
 #        exit 1
 #fi
 
+echo "--------------------"
+echo "     ios:beta       "
+echo "--------------------"
+
 source ~/bin/key.sh
 # Ensure Xcode uses Apple's rsync
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
@@ -52,7 +56,7 @@ cp -a ios/App dist/ios
 #npx electron-builder --linux AppImage deb --x64
 
 #bin/pub-linux.sh
-
+echo "----- danku -----"
 scp bin/build-desktop.sh larpoux@danku:~/bin/
 ssh larpoux@danku 'bash -lc "~/bin/build-desktop.sh linux"'
 if [ $? -ne 0 ]; then
@@ -65,6 +69,7 @@ fi
 #        exit 1
 #fi
 
+echo "----- jupiter -----"
 scp bin/build-desktop.sh larpoux@jupiter:~/bin/
 ssh larpoux@jupiter 'bash -lc "~/bin/build-desktop.sh linux"'
 if [ $? -ne 0 ]; then
@@ -77,7 +82,7 @@ fi
 #        exit 1
 #fi
 
-
+echo "----- zeus -----"
 scp bin/build-desktop.sh larpoux@zeus:~/bin/
 ssh larpoux@zeus 'bash -lc "~/bin/build-desktop.sh linux"'
 if [ $? -ne 0 ]; then
@@ -90,6 +95,7 @@ fi
 #        exit 1
 #fi
 
+echo "----- bigmac -----"
 scp bin/build-desktop.sh larpoux@bigmac:~/bin/
 ssh larpoux@bigmac 'bash -lc "~/bin/build-desktop.sh win"' 
 if [ $? -ne 0 ]; then
