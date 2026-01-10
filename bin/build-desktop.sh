@@ -1,7 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "REMOTE"
+PLATFORM="${1:-}"
+
+# --- Validate PLATFORM ---
+case "$PLATFORM" in
+        mac|win|linux) ;;
+        *) echo "Usage: $0 [mac|win|linux]" >&2
+        exit 1
+         ;;
+esac
+
 cd ~/proj/dyglot
 
 export NVM_DIR="$HOME/.nvm"
@@ -25,4 +34,4 @@ nvm alias default 24 >/dev/null
 node -v
 git pull
 npm ci
-npm run build:desktop
+npm run "desktop:dist:$PLATFORM"
