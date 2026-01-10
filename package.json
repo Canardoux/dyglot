@@ -10,7 +10,7 @@
 		"build": "svelte-kit sync && vite build",
 		"preview": "vite preview",
 
-		"build:desktop": "cross-env BUILD_TARGET=desktop VITE_BUILD_TARGET=desktop svelte-kit sync && vite build",
+		"build:desktop": "node scripts/build-desktop.mjs",
 		"build:ios": "cross-env BUILD_TARGET=ios VITE_BUILD_TARGET=ios svelte-kit sync && vite build",
 
 		"desktop:dev": "concurrently -k \"cross-env BUILD_TARGET=desktop VITE_BUILD_TARGET=desktop vite dev\" \"wait-on http://localhost:5173 && electron .\"",
