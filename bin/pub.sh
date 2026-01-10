@@ -5,6 +5,9 @@ if [ $# -eq 0 ]; then
 fi
 rm -rf dist build dist-electron 2>/dev/null
 mkdir dist
+echo "--------------------"
+echo "     build:web      "
+echo "--------------------"
 npm run build:web
 if [ $? -ne 0 ]; then
 	echo "Error during `npm run build`" >&2
@@ -21,7 +24,7 @@ if [ $? -ne 0 ]; then
         echo "Error during `bin/build-desktop.sh`" >&2
         exit 1
 fi
-mv dist-electron dist/mac
+mv dist-electron dist/mac-arm64
 #npm run desktop:dist:mac
 #if [ $? -ne 0 ]; then
 #        echo "Error during `npm run desktop:dist:mac`" >&2
@@ -40,7 +43,7 @@ if [ $? -ne 0 ]; then
         exit 1
 fi
 
-cp -a ios/app dist/ios
+cp -a ios/App dist/ios
 
 #rm -rf build .svelte-kit dist-electron
 #BUILD_TARGET=desktop VITE_BUILD_TARGET=desktop npm run build:desktop

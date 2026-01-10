@@ -11,6 +11,9 @@ case "$PLATFORM" in
          ;;
 esac
 
+echo "----------------------------"
+echo "   build-desktop $PLATFORM  "
+echo "----------------------------"
 cd ~/proj/dyglot
 
 export NVM_DIR="$HOME/.nvm"
