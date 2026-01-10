@@ -15,10 +15,16 @@ function adapterForTarget() {
       return adapterStatic({
         fallback: 'index.html'
       });
+    case 'vercel':
+      return adapterVercel();
 
     case 'web':
+      return adapterStatic({
+        fallback: 'index.html' // si vous voulez une SPA (routes côté client)
+      });
+
     default:
-      return adapterVercel();
+      return adapterStatic();
   }
 }
 
