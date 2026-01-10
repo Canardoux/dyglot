@@ -40,7 +40,8 @@ if [ $? -ne 0 ]; then
         exit 1
 fi
 
-exit 0
+mv ios dist/
+
 #rm -rf build .svelte-kit dist-electron
 #BUILD_TARGET=desktop VITE_BUILD_TARGET=desktop npm run build:desktop
 ## vérifiez que le log dit bien: "Using @sveltejs/adapter-static" + "Wrote site to "build""
@@ -50,7 +51,7 @@ exit 0
 #bin/pub-linux.sh
 
 scp bin/build-desktop.sh larpoux@danku:~/bin/
-ssh larpoux@danku 'bash -lc ~/bin/build-desktop.sh linux'
+ssh larpoux@danku 'bash -lc "~/bin/build-desktop.sh linux"'
 if [ $? -ne 0 ]; then
         echo "Error during `bin/build-desktop.sh on danku`" >&2
         exit 1
@@ -62,7 +63,7 @@ fi
 #fi
 
 scp bin/build-desktop.sh larpoux@jupiter:~/bin/
-ssh larpoux@jupiter 'bash -lc ~/bin/build-desktop.sh linux'
+ssh larpoux@jupiter 'bash -lc "~/bin/build-desktop.sh linux"'
 if [ $? -ne 0 ]; then
         echo "Error during `bin/build-desktop.sh on jupiter`" >&2
         exit 1
@@ -75,7 +76,7 @@ fi
 
 
 scp bin/build-desktop.sh larpoux@zeus:~/bin/
-ssh larpoux@zeus 'bash -lc ~/bin/build-desktop.sh linux'
+ssh larpoux@zeus 'bash -lc "~/bin/build-desktop.sh linux"'
 if [ $? -ne 0 ]; then
         echo "Error during `bin/build-desktop.sh on zeus`" >&2
         exit 1
@@ -87,7 +88,7 @@ fi
 #fi
 
 scp bin/build-desktop.sh larpoux@bigmac:~/bin/
-ssh larpoux@bigmac 'bash -lc ~/bin/build-desktop.sh win' 
+ssh larpoux@bigmac 'bash -lc "~/bin/build-desktop.sh win"' 
 if [ $? -ne 0 ]; then
         echo "Error during `bin/build-desktop.sh on bigmac`" >&2
         exit 1
