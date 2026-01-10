@@ -1,47 +1,40 @@
-/*import { mdsvex } from 'mdsvex';
+// svelte.config.js
+import adapterStatic from '@sveltejs/adapter-static';
+import adapterVercel from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import vercel from '@sveltejs/adapter-vercel';
-import staticAdapter from '@sveltejs/adapter-static';
 
-const target = process.env.BUILD_TARGET || process.env.VITE_BUILD_TARGET || '';
-const isStatic = target === 'ios' || target === 'desktop';
+const target = process.env.BUILD_TARGET;
+
+console.log('[svelte.config] BUILD_TARGET =', target);
+
+function adapterForTarget() {
+  switch (target) {
+    case 'desktop':
+    case 'ios':
+    case 'android':
+      return adapterStatic({
+        fallback: 'index.html'
+      });
+
+    case 'web':
+    default:
+      return adapterVercel();
+  }
+}
 
 export default {
-  preprocess: [vitePreprocess(), mdsvex()],
-  extensions: ['.svelte', '.svx'],
-  kit: {
-    adapter: isStatic ? staticAdapter({ fallback: 'index.html' }) : vercel(),
-    serviceWorker: { register: false }
-  }
-};
-*/
-
-// svelte.config.js
-// svelte.config.js
-import { mdsvex } from 'mdsvex';
-import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import vercel from '@sveltejs/adapter-vercel';
-import staticAdapter from '@sveltejs/adapter-static';
-
-const target = process.env.BUILD_TARGET; // 'desktop' | 'ios' | undefined
-console.log('[svelte.config] BUILD_TARGET =', process.env.BUILD_TARGET);
-const isStatic = target === 'desktop' || target === 'ios';
-
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-  preprocess: [vitePreprocess(), mdsvex()],
-  extensions: ['.svelte', '.svx'],
+  preprocess: vitePreprocess(),
 
   kit: {
-    adapter: isStatic
-      ? staticAdapter({ fallback: 'index.html' })
-      : vercel(),
+    adapter: adapterForTarget(),
 
-    // Important: desktop/ios => on ne veut pas de SW auto
+    paths:
+      target === 'desktop' || target === 'ios' || target === 'android'
+        ? { relative: true }
+        : undefined,
+
     serviceWorker: {
-      register: !isStatic
+      register: false
     }
   }
 };
-
-export default config;
