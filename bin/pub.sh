@@ -32,5 +32,10 @@ fi
 
 #bin/pub-linux.sh
 
+scp bin/build-desktop.sh larpoux@danku:~/bin
+ssh larpoux@danku ~/bin/build-desktop.sh
+
+
+
 echo "*** E.O.J. ***"
 
