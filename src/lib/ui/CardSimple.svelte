@@ -92,7 +92,7 @@ onDestroy(() => {
         class="rounded-xl border px-4 py-3"
         on:click={openDetails}
       >
-        Details(!!!)
+        Details(###)
       </button>
     </div>
   {/if}
@@ -118,7 +118,7 @@ onDestroy(() => {
     <div class="absolute inset-x-0 bottom-0">
       <div class="mx-auto w-full max-w-md rounded-t-2xl bg-white shadow-xl border">
         <div class="flex items-center justify-between p-4 border-b">
-          <div class="font-semibold">Details</div>
+          <div class="font-semibold">Details(###)</div>
           <button
             class="rounded-lg px-3 py-1 border"
             on:click={closeDetails}

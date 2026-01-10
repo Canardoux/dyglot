@@ -82,13 +82,13 @@ fi
 #        exit 1
 #fi
 
-echo "----- zeus -----"
-scp bin/build-desktop.sh larpoux@zeus:~/bin/
-ssh larpoux@zeus 'bash -lc "~/bin/build-desktop.sh linux"'
-if [ $? -ne 0 ]; then
-        echo "Error during `bin/build-desktop.sh on zeus`" >&2
-        exit 1
-fi
+#echo "----- zeus -----"
+#scp bin/build-desktop.sh larpoux@zeus:~/bin/
+#ssh larpoux@zeus 'bash -lc "~/bin/build-desktop.sh linux"'
+#if [ $? -ne 0 ]; then
+#        echo "Error during `bin/build-desktop.sh on zeus`" >&2
+#        exit 1
+#fi
 #npm run desktop:dist:linux
 #if [ $? -ne 0 ]; then
 #        echo "Error during `npm run desktop:dist:linux`" >&2
