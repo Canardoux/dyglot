@@ -18,14 +18,30 @@ export default {
 
 // svelte.config.js
 // svelte.config.js
-import ios from './svelte.config.ios.js';
-import desktop from './svelte.config.desktop.js';
-import web from './svelte.config.web.js';
+import { mdsvex } from 'mdsvex';
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
+import vercel from '@sveltejs/adapter-vercel';
+import staticAdapter from '@sveltejs/adapter-static';
 
-const target = process.env.BUILD_TARGET;
+const target = process.env.BUILD_TARGET; // 'desktop' | 'ios' | undefined
+console.log('[svelte.config] BUILD_TARGET =', process.env.BUILD_TARGET);
+const isStatic = target === 'desktop' || target === 'ios';
 
-export default target === 'ios'
-  ? ios
-  : target === 'desktop'
-    ? desktop
-    : web;
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+  preprocess: [vitePreprocess(), mdsvex()],
+  extensions: ['.svelte', '.svx'],
+
+  kit: {
+    adapter: isStatic
+      ? staticAdapter({ fallback: 'index.html' })
+      : vercel(),
+
+    // Important: desktop/ios => on ne veut pas de SW auto
+    serviceWorker: {
+      register: !isStatic
+    }
+  }
+};
+
+export default config;
