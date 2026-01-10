@@ -39,14 +39,14 @@ fi
 
 #bin/pub-linux.sh
 
-scp bin/build-desktop.sh larpoux@danku:~/bin
+scp bin/build-desktop.sh larpoux@danku:~/bin/
 ssh larpoux@danku 'bash -lc ~/bin/build-desktop.sh'
 if [ $? -ne 0 ]; then
         echo "Error during `bin/build-desktop.sh on danku`" >&2
         exit 1
 fi
 
-scp bin/build-desktop.sh larpoux@jupiter:~/bin
+scp bin/build-desktop.sh larpoux@jupiter:~/bin/
 ssh larpoux@jupiter 'bash -lc ~/bin/build-desktop.sh'
 if [ $? -ne 0 ]; then
         echo "Error during `bin/build-desktop.sh on jupiter`" >&2
@@ -54,15 +54,15 @@ if [ $? -ne 0 ]; then
 fi
 
 
-scp bin/build-desktop.sh larpoux@zeus:~/bin
+scp bin/build-desktop.sh larpoux@zeus:~/bin/
 ssh larpoux@zeus 'bash -lc ~/bin/build-desktop.sh'
 if [ $? -ne 0 ]; then
         echo "Error during `bin/build-desktop.sh on zeus`" >&2
         exit 1
 fi
 
-scp bin/build-desktop.sh larpoux@bigmac:~/bin
-ssh larpoux@bigmac 'bash -lc ~/bin/build-desktop.sh'
+scp bin/build-desktop.sh larpoux@bigmac:~/bin/
+ssh larpoux@bigmac 'bash -lc ~/bin/build-desktop.sh' 
 if [ $? -ne 0 ]; then
         echo "Error during `bin/build-desktop.sh on bigmac`" >&2
         exit 1

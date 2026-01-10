@@ -2,7 +2,7 @@
 set -euo pipefail
 
 echo "REMOTE"
-cd "$HOME/proj/dyglot"
+cd ~/proj/dyglot
 
 export NVM_DIR="$HOME/.nvm"
 
