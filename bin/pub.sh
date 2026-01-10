@@ -14,6 +14,10 @@ git pull
 git push
 
 bin/build-desktop.sh
+if [ $? -ne 0 ]; then
+        echo "Error during `bin/build-desktop.sh`" >&2
+        exit 1
+fi
 
 source ~/bin/key.sh
 # Ensure Xcode uses Apple's rsync
@@ -37,17 +41,34 @@ fi
 
 scp bin/build-desktop.sh larpoux@danku:~/bin
 ssh larpoux@danku 'bash -lc ~/bin/build-desktop.sh'
+if [ $? -ne 0 ]; then
+        echo "Error during `bin/build-desktop.sh on danku`" >&2
+        exit 1
+fi
 
 scp bin/build-desktop.sh larpoux@jupiter:~/bin
 ssh larpoux@jupiter 'bash -lc ~/bin/build-desktop.sh'
+if [ $? -ne 0 ]; then
+        echo "Error during `bin/build-desktop.sh on jupiter`" >&2
+        exit 1
+fi
 
 
 scp bin/build-desktop.sh larpoux@zeus:~/bin
 ssh larpoux@zeus 'bash -lc ~/bin/build-desktop.sh'
+if [ $? -ne 0 ]; then
+        echo "Error during `bin/build-desktop.sh on zeus`" >&2
+        exit 1
+fi
 
 scp bin/build-desktop.sh larpoux@bigmac:~/bin
 ssh larpoux@bigmac 'bash -lc ~/bin/build-desktop.sh'
+if [ $? -ne 0 ]; then
+        echo "Error during `bin/build-desktop.sh on bigmac`" >&2
+        exit 1
+fi
 
 
 echo "*** E.O.J. ***"
+exit 0
 

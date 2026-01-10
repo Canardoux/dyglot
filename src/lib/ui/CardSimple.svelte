@@ -92,7 +92,7 @@ onDestroy(() => {
         class="rounded-xl border px-4 py-3"
         on:click={openDetails}
       >
-        Détails
+        Details!!!
       </button>
     </div>
   {/if}
