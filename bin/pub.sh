@@ -12,6 +12,9 @@ git add .
 git commit -m "$1"
 git pull
 git push
+
+bin/build-desktop.sh
+
 source ~/bin/key.sh
 # Ensure Xcode uses Apple's rsync
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
@@ -33,8 +36,17 @@ fi
 #bin/pub-linux.sh
 
 scp bin/build-desktop.sh larpoux@danku:~/bin
-ssh larpoux@danku ~/bin/build-desktop.sh
+ssh larpoux@danku 'bash -lc ~/bin/build-desktop.sh'
 
+scp bin/build-desktop.sh larpoux@jupiter:~/bin
+ssh larpoux@jupiter 'bash -lc ~/bin/build-desktop.sh'
+
+
+scp bin/build-desktop.sh larpoux@zeus:~/bin
+ssh larpoux@zeus 'bash -lc ~/bin/build-desktop.sh'
+
+scp bin/build-desktop.sh larpoux@bigmac:~/bin
+ssh larpoux@bigmac 'bash -lc ~/bin/build-desktop.sh'
 
 
 echo "*** E.O.J. ***"
