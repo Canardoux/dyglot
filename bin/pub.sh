@@ -40,7 +40,7 @@ if [ $? -ne 0 ]; then
         exit 1
 fi
 
-mv ios dist/
+cp -a ios/app dist/ios
 
 #rm -rf build .svelte-kit dist-electron
 #BUILD_TARGET=desktop VITE_BUILD_TARGET=desktop npm run build:desktop
