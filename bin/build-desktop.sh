@@ -41,4 +41,4 @@ git clean -fdx
 npm ci
 npm run "desktop:dist:$PLATFORM"
 R=$?
-exit R
+exit $R

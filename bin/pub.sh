@@ -4,6 +4,9 @@ if [ $# -eq 0 ]; then
 	exit 1
 fi
 rm -rf dist build dist-electron 2>/dev/null
+git add .
+git commit -m "Version $1"
+git push
 mkdir dist
 echo "--------------------"
 echo "     build:web      "
