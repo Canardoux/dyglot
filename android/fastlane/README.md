@@ -21,7 +21,7 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 [bundle exec] fastlane android beta
 ```
 
-Build & upload AAB to Google Play - Internal testing
+Build web, sync capacitor, build AAB, upload to Play Internal
 
 ----
 
