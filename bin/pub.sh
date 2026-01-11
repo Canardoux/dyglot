@@ -32,10 +32,25 @@ mv dist-electron dist/mac-arm64
 #fi
 
 echo "--------------------"
+echo "     android:beta   "
+echo "--------------------"
+
+bin/android-bump-version.sh
+source ~/.dyglot-secrets/android.env
+npm run android:beta
+if [ $? -ne 0 ]; then
+        echo "Error during `npm run android:beta`" >&2
+        exit 1
+fi
+
+cp -a android/app/build/outputs/bundle/release dist/android-release
+
+
+echo "--------------------"
 echo "     ios:beta       "
 echo "--------------------"
 
-source ~/bin/key.sh
+source ~/.dyglot-secrets/asc.env
 # Ensure Xcode uses Apple's rsync
 export PATH="/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 hash -r
