@@ -35,6 +35,10 @@ nvm use 24 >/dev/null
 nvm alias default 24 >/dev/null
 
 node -v
-git pull
+git fetch origin
+git reset --hard origin/main
+git clean -fdx
 npm ci
 npm run "desktop:dist:$PLATFORM"
+R=$?
+exit R

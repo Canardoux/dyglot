@@ -14,14 +14,16 @@ if [ $? -ne 0 ]; then
 	exit 1
 fi
 mv build dist/web
-git add .
-git commit -m "$1"
-git pull
-git push
 
-bin/build-desktop.sh mac
+
+echo "----------------------------"
+echo "   build-desktop mac        "
+echo "----------------------------"
+
+npm ci
+npm run "desktop:dist:mac"
 if [ $? -ne 0 ]; then
-        echo "Error during `bin/build-desktop.sh`" >&2
+        echo "Error during `desktop:dist:mac`" >&2
         exit 1
 fi
 mv dist-electron dist/mac-arm64
@@ -122,6 +124,10 @@ fi
 #        echo "Error during `npm run desktop:dist:win`" >&2
 #        exit 1
 #fi
+git add .
+git commit -m "$1"
+git pull
+git push
 
 
 echo "*** E.O.J. ***"
